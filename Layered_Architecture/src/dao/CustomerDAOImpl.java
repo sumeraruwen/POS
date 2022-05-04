@@ -47,7 +47,8 @@ public class CustomerDAOImpl implements CustomerDAO{
         PreparedStatement pstm = connection.prepareStatement("SELECT id FROM Customer WHERE id=?");
         pstm.setString(1, id);
         return pstm.executeQuery().next();*/
-        return SQLUtil.executeUpdate("SELECT id FROM Customer WHERE id=?",id);
+        return SQLUtil.executeQuery("SELECT id FROM Customer WHERE id=?",id).next();
+
     }
 
     @Override
