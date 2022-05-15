@@ -1,5 +1,6 @@
 package controller;
 
+import bo.ItemBO;
 import bo.ItemBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -32,6 +33,10 @@ import java.util.ArrayList;
  **/
 
 public class ManageItemsFormController {
+
+    //DI through property injection
+    private ItemBO itemBO = new ItemBOImpl();
+
     public AnchorPane root;
     public JFXTextField txtCode;
     public JFXTextField txtDescription;
@@ -79,8 +84,6 @@ public class ManageItemsFormController {
         try {
             /*Get all items*/
 
-            //DI
-            ItemBOImpl itemBO = new ItemBOImpl();
             ArrayList<ItemDTO> allItems = itemBO.getAllItems();
 
             for(ItemDTO item:allItems){
@@ -144,9 +147,6 @@ tblItems.getItems().add(new ItemTM(item.getCode(),item.getDescription(),item.get
                 new Alert(Alert.AlertType.ERROR, "There is no such item associated with the id " + code).show();
             }
 
-
-            //DI
-            ItemBOImpl itemBO = new ItemBOImpl();
             itemBO.deleteItem(code);
 
             tblItems.getItems().remove(tblItems.getSelectionModel().getSelectedItem());
@@ -188,9 +188,6 @@ tblItems.getItems().add(new ItemTM(item.getCode(),item.getDescription(),item.get
                 }
                 //Save Item
 
-
-                //DI
-                ItemBOImpl itemBO = new ItemBOImpl();
                 itemBO.saveItem(new ItemDTO(code, description, unitPrice, qtyOnHand));
 
 
@@ -210,8 +207,6 @@ tblItems.getItems().add(new ItemTM(item.getCode(),item.getDescription(),item.get
                 }
                 /*Update Item*/
 
-                //DI
-                ItemBOImpl itemBO = new ItemBOImpl();
                 itemBO.updateItem(new ItemDTO(code, description, unitPrice, qtyOnHand));
 
                 ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
@@ -232,8 +227,6 @@ tblItems.getItems().add(new ItemTM(item.getCode(),item.getDescription(),item.get
 
     private boolean existItem(String code) throws SQLException, ClassNotFoundException {
 
-        //DI
-        ItemBOImpl itemBO = new ItemBOImpl();
         return itemBO.itemExist(code);
     }
 
@@ -241,8 +234,6 @@ tblItems.getItems().add(new ItemTM(item.getCode(),item.getDescription(),item.get
     private String generateNewId() {
         try {
 
-            //DI
-            ItemBOImpl itemBO = new ItemBOImpl();
             return itemBO.generateNewItemCode();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
