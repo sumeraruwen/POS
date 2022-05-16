@@ -18,19 +18,22 @@ import java.util.List;
 
 public class PurchaseOrderBOImpl implements PurchaseOrderBO {
 
-    CustomerDAO customerDAO = DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CUSTOMER);
-    ItemDAO itemDAO =  DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ITEM);
+    CustomerDAO customerDAO =(CustomerDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CUSTOMER);
+    ItemDAO itemDAO = (ItemDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ITEM);
+    OrderDAO orderDAO = (OrderDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDER);
+    OrderDetailsDAO orderDetailsDAO =(OrderDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDERDETAILS);
+    QueryDAO queryDAO = (QueryDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.QUERYDAO);
+
     //Exposed the object creation logic
     //private final CustomerDAO customerDAO = new CustomerDAOImpl();
    // private final ItemDAO itemDAO = new ItemDAOImpl();
-    private final OrderDAO orderDAO = new OrderDAOImpl();
-    private final OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAOImpl();
-    private final QueryDAO queryDAO = new QueryDAOImpl();
+   // private final OrderDAO orderDAO = new OrderDAOImpl();
+   // private final OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAOImpl();
+   // private final QueryDAO queryDAO = new QueryDAOImpl();
 
     @Override
     public boolean purchaseOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) throws SQLException, ClassNotFoundException {
 
-        //ItemDAO itemDAO =  DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ITEM);
 
         /*Transaction*/
         Connection connection = DBConnection.getDbConnection().getConnection();

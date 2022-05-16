@@ -25,15 +25,15 @@ public class DAOFactory {
     public SuperDAO getDAO(DAOTypes types) {
         switch (types) {
             case CUSTOMER:
-                return new CustomerDAOImpl();
+                return new CustomerDAOImpl();//SuperDAO superDAP =new CustomerDAOImpl()
             case ITEM:
-                return new ItemDAOImpl();
+                return new ItemDAOImpl(); //SuperDAO superDAP =new ItemDAOImpl()
             case ORDER:
-                return new OrderDAOImpl();
+                return new OrderDAOImpl();//SuperDAO superDAP =new OrderDAOImpl()
             case ORDERDETAILS:
-                return new OrderDetailsDAOImpl();
+                return new OrderDetailsDAOImpl();//SuperDAO superDAP =new OrderDetailsDAOImpl()
             case QUERYDAO:
-                return new QueryDAOImpl();
+                return new QueryDAOImpl();//SuperDAO superDAP =new QueryDAOImpl()
             default:
                 return null;
         }
